@@ -17,37 +17,11 @@ if (process.env.NODE_ENV !== "production") {
 
 
 initializePassport(
-    passport
-    //   (email) => {
-    //    User.findOne({email: email}, (err, user) => {
-    //        if (err) {return err}
-    //        else {
-    //         console.log(user)   
-    //         return user
-    //     }
-    //    })
-    // },
-    // (id) => {
-    //     User.find({_id: id}, (err, user) => {
-    //        if (err) {
-    //            return err
-    //        } else {
-    //            return user
-    //        }
-    //     })
-    //}
-//     email => {
-//         return users.find(user => user.email === email)
-// },
-// id => {
-//     return users.find(user => user.id === id)
-// }
-)
+    passport   )
 
 const app = express()
 
 
-// const users = []
 
 app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
