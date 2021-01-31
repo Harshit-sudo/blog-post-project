@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Blog</title>
+</head>
+<body>
+   <div class="container">
+        <h1 class="mb-4"><%= article.title %></h1>
+        <div class="text-muted mb-2"><%= article.createdAt.toLocaleDateString() %></div>
+        <a href="/read" class="btn btn-secondary">All articles</a>
+        <% if (req.session.passport.user == article.user) { %>
+        <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+        <% } %>
+        <div class="d-block mt-2">
+            <%= article.description %>
+        </div>
+        
+        <div>
+        <p class="d-block mt-2"><%- article.sanitizedHtml %></p>
+        </div>
+        <form action="/articles/comment/<%= article.id %>" method="POST">
+        <div class="form-group">
+            <label for="comment">Add comment</label>
+            <textarea name="comment" id="comment" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success mt-2">Add Comment</button>   
+        </form>
+
+        <% if (article.comments) { %>
+             <% article.comments.forEach(comment => { %>
+                    <div class="d-inline">
+                    <p class="d-inline"><%= comment.comment %></p>
+                    <p>by <%= comment.person %></p>
+                    </div>
+                <% })%>
+        <% }  %>
+
+
+   </div>
+
+  
+</body>
+</html>
